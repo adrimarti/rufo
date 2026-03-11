@@ -142,11 +142,16 @@ function setupProfileLogic() {
   }
 }
 
+const statusInput = document.getElementById('locator-status-input');
+
 saveNameBtn.addEventListener('click', () => {
   const val = nameInput.value.trim();
+  const statVal = statusInput ? statusInput.value.trim() : '';
   if (val) {
     userName = val;
+    userStatus = statVal;
     localStorage.setItem('putedex_user_name', userName);
+    localStorage.setItem('putedex_user_status', userStatus);
     nameModal.classList.add('hidden');
     startLocationTracking(userName, userStatus);
   }

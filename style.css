@@ -9,7 +9,8 @@
   --lcd-text: #2c3e50;
   --neon-blue: #00f3ff;
   --neon-red: #ff003c;
-  --pkmn-red: #dc0a2d; /* Replaced pkmn-blue */
+  --pkmn-red: #dc0a2d;
+  /* Replaced pkmn-blue */
   --pkmn-red-accent: #d63031;
   --pkmn-bg-gray: #e0e0e0;
   --pkmn-grid: rgba(0, 0, 0, 0.05);
@@ -653,9 +654,14 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 6px;
+  padding: 10px;
   position: relative;
-  /* Ensure overlay covers this correctly */
+  overflow: hidden;
+}
+
+.locator-header {
+  flex-shrink: 0;
+  text-align: center;
 }
 
 .locator-header h2 {
@@ -674,17 +680,21 @@ body {
 }
 
 .radar-container {
-  margin: 15px auto;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  min-height: 0;
+  /* Allow shrinking if needed */
 }
 
 .radar-actions {
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
-  padding: 10px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .pkmn-btn {
@@ -754,27 +764,92 @@ body {
 
 .radar-disk {
   width: 280px;
-  /* Increased from 220px */
   height: 280px;
-  /* Increased from 220px */
-  background: radial-gradient(circle, rgba(0, 50, 0, 0.4) 0%, rgba(0, 20, 0, 0.7) 100%);
+  background: #001500;
   border: 4px solid #333;
   border-radius: 50%;
   position: relative;
   overflow: hidden;
-  box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 30px rgba(0, 255, 0, 0.15), 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.radar-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center center;
+  z-index: 1;
+}
+
+.radar-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(0, 255, 0, 0.15);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.radar-ring[data-dist="500m"] {
+  width: 33%;
+  height: 33%;
+}
+
+.radar-ring[data-dist="1000m"] {
+  width: 66%;
+  height: 66%;
+}
+
+.radar-ring[data-dist="1500m"] {
+  width: 99%;
+  height: 99%;
+}
+
+.radar-ring::after {
+  content: attr(data-dist);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.6rem;
+  color: rgba(0, 255, 0, 0.4);
+  font-family: var(--font-lcd);
+}
+
+.radar-status {
+  margin-top: 4px;
+  background: #000;
+  color: var(--neon-red);
+  font-family: var(--font-lcd);
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  text-align: center;
+  border: 1px solid #333;
+  box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.2);
+  flex-shrink: 0;
 }
 
 .radar-sweep {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: conic-gradient(from 0deg, rgba(0, 255, 100, 0.4) 0deg, transparent 90deg);
-  transform-origin: top left;
+  background: conic-gradient(from 0deg, rgba(0, 255, 0, 0.3) 0deg, transparent 90deg);
+  border-radius: 50%;
   animation: sweep 4s linear infinite;
-  z-index: 1;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .overlay-header-actions {
@@ -823,20 +898,31 @@ body {
   box-sizing: border-box;
 }
 
+.btn-round {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s;
+}
+
 .btn-round.red {
   background: var(--pokedex-red);
   border: 3px solid #333;
-  box-shadow: 4px 4px 0px #333;
+  box-shadow: 0 4px 0 #333;
 }
 
 .btn-round.red:active {
-  box-shadow: 0px 0px 0px #333;
-  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 #333;
+  transform: translateY(4px);
 }
 
 .btn-round.red::after {
   content: '×';
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: white;
   font-weight: bold;
 }
@@ -844,17 +930,17 @@ body {
 .btn-round.green {
   background: #4ade80;
   border: 3px solid #333;
-  box-shadow: 4px 4px 0px #333;
+  box-shadow: 0 4px 0 #333;
 }
 
 .btn-round.green:active {
-  box-shadow: 0px 0px 0px #333;
-  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 #333;
+  transform: translateY(4px);
 }
 
 .btn-round.green::after {
   content: '✓';
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: white;
   font-weight: bold;
 }
@@ -933,6 +1019,26 @@ body {
 .radar-blip:hover {
   transform: translate(-50%, -50%) scale(1.3);
   box-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00;
+}
+
+.radar-target-label {
+  position: relative;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: var(--neon-blue);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 900;
+  white-space: nowrap;
+  border: 1px solid var(--neon-blue);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+  z-index: 10;
+  font-family: var(--font-pkmn);
+  letter-spacing: 1px;
 }
 
 /* Tracking System removed as per new logic */
@@ -1014,29 +1120,63 @@ body {
 }
 
 .friend-card {
-  padding: 15px 20px;
-  /* Increased from 12px */
-  background: rgba(0, 0, 0, 0.1);
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  padding: 12px 15px;
+  background: #f8f8f8;
+  border: 3px solid #ddd;
+  border-radius: 10px;
   display: flex;
-  gap: 15px;
-  /* Increased from 12px */
+  gap: 12px;
   align-items: center;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  cursor: pointer;
+  transition: all 0.2s ease;
   position: relative;
-  overflow: hidden;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.05);
 }
 
-.friend-card::before {
-  content: '';
+.friend-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+.btn-follow {
+  background: #444;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: var(--font-pkmn);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 3px 0 #222;
+}
+
+.btn-follow:hover {
+  background: #555;
+}
+
+.friend-card.tracking .btn-follow {
+  background: var(--neon-red);
+  box-shadow: 0 3px 0 #8b0000;
+}
+
+.friend-card.closest {
+  border-color: var(--pkmn-yellow);
+  background: #fffdf0;
+}
+
+.friend-card.closest::after {
+  content: 'CERCA';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.2);
+  top: 5px;
+  right: 5px;
+  background: var(--pkmn-yellow);
+  color: #000;
+  font-size: 0.6rem;
+  font-weight: 900;
+  padding: 2px 5px;
+  border-radius: 4px;
+  border: 1px solid #000;
 }
 
 .friend-card:hover {

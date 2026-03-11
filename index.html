@@ -95,8 +95,8 @@
           <!-- Tab 2: Radar -->
           <main id="locator-view" class="view">
             <div class="locator-header">
-              <h2>RASTREADOR DE ESPECÍMENES</h2>
-              <p>Detección de vida en proximidad</p>
+              <h2>RASTREADOR DE AMIGOS</h2>
+              <p>Detección de guarros en proximidad</p>
             </div>
 
             <div class="radar-status" id="radar-status">
@@ -105,6 +105,10 @@
 
             <div class="radar-container" id="radar-container">
               <div class="radar-disk">
+                <div class="radar-grid"></div>
+                <div class="radar-ring" data-dist="500m"></div>
+                <div class="radar-ring" data-dist="1000m"></div>
+                <div class="radar-ring" data-dist="1500m"></div>
                 <div class="radar-sweep"></div>
                 <div class="radar-crosshair-v"></div>
                 <div class="radar-crosshair-h"></div>
@@ -120,6 +124,10 @@
               <button id="toggle-friends-btn" class="pkmn-btn">LISTA DE AMIGOS</button>
             </div>
 
+            <div id="radar-target-label" class="radar-target-label hidden">
+              SIGUIENDO A:
+              <span id="target-name-val">---</span>
+            </div>
             <!-- Friends List Container (Hidden by default) -->
             <div id="friends-list-container" class="friends-overlay hidden">
               <div class="overlay-content">
@@ -145,8 +153,7 @@
             <input type="number" id="secret-code" placeholder="CÓDIGO" maxlength="4" />
             <div class="modal-actions">
               <button id="cancel-btn" class="btn-round big" title="Cancelar"></button>
-              <button id="confirm-btn" class="btn-round big"
-                title="Confirmar"></button>
+              <button id="confirm-btn" class="btn-round big" title="Confirmar"></button>
             </div>
             <p id="modal-error" class="error-msg hidden">CÓDIGO ERRÓNEO</p>
           </div>
@@ -187,13 +194,22 @@
   </div>
 
 
-  <!-- Locator Welcome Modal -->
-  <div id="locator-name-modal" class="modal hidden">
-    <div class="modal-content">
-      <h2>IDENTIFICACIÓN</h2>
-      <p>Introduce tu alias de rastreador</p>
-      <input type="text" id="locator-name-input" placeholder="Nombre..." maxlength="15" />
-      <button id="save-name-btn" class="btn-round big"></button>
+  <!-- Unified Locator Welcome Modal -->
+  <div id="locator-name-modal" class="modal hidden integrated">
+    <div class="modal-content lcd-style">
+      <h2>SISTEMA RUFO</h2>
+      <p>ID DE RASTREADOR REQUERIDO</p>
+      <div class="form-group lcd-input">
+        <label>ALIAS (OBLIGATORIO)</label>
+        <input type="text" id="locator-name-input" placeholder="Nombre..." maxlength="15" />
+      </div>
+      <div class="form-group lcd-input">
+        <label>ESTADO INICIAL</label>
+        <textarea id="locator-status-input" placeholder="¿Qué estás haciendo?" maxlength="200" rows="3"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button id="save-name-btn" class="btn-round green" title="Confirmar"></button>
+      </div>
     </div>
   </div>
 

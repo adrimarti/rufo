@@ -9,6 +9,13 @@ const indicatorDistValue = document.getElementById('indicator-dist-value');
 const toggleFriendsBtn = document.getElementById('toggle-friends-btn');
 const closeFriendsBtn = document.getElementById('close-friends-btn');
 const friendsListContainer = document.getElementById('friends-list-container');
+const radarTargetLabel = document.getElementById('radar-target-label');
+const targetNameVal = document.getElementById('target-name-val');
+
+// Modal Elements
+const locatorNameInput = document.getElementById('locator-name-input');
+const locatorStatusInput = document.getElementById('locator-status-input');
+const saveNameBtn = document.getElementById('save-name-btn');
 
 // State
 let supabaseClient = null;
@@ -97,7 +104,8 @@ function updateMyLocation() {
 export async function updateFriendsUI() {
   if (currentLat === null) return;
   
-  radarStatus.textContent = `Actualizado: ${new Date().toLocaleTimeString().slice(0,5)}`;
+  const now = new Date();
+  radarStatus.textContent = `SYNC: ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }).replace(/:/g, ' ')}`;
   
   const sixHoursAgo = new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString();
   const { data, error } = await supabaseClient
@@ -119,19 +127,18 @@ export async function updateFriendsUI() {
     return { ...f, distance: dist, isMe: false };
   }).sort((a, b) => a.distance - b.distance);
 
-  friends.forEach(f => {
+  friends.forEach((f, idx) => {
     const el = document.createElement('div');
     const isTracking = trackingId === f.device_id;
-    el.className = `friend-card ${f.isMe ? 'self' : ''} ${isTracking ? 'tracking' : ''}`;
+    const isClosest = !f.isMe && idx === (friends[0].isMe ? 1 : 0);
+    el.className = `friend-card ${f.isMe ? 'self' : ''} ${isTracking ? 'tracking' : ''} ${isClosest ? 'closest' : ''}`;
     
-    let distStr = f.isMe ? 'Tú' : (f.distance < 1000 ? `${Math.round(f.distance)}m` : `${(f.distance/1000).toFixed(1)}km`);
+    let distStr = f.isMe ? 'USTED' : (f.distance < 1000 ? `${Math.round(f.distance)}m` : `${(f.distance/1000).toFixed(1)}km`);
     
     const msAgo = Date.now() - new Date(f.last_updated).getTime();
     const minsAgo = Math.floor(msAgo / 60000);
     const timeStr = minsAgo < 1 ? 'LIVE' : `HACE ${minsAgo}M`;
     
-    // Deterministic funny status based on device_id
-    // Use actual status if available, otherwise deterministic funny status
     const statusIdx = f.device_id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % funnyStatusMessages.length;
     const funnyStatus = f.isMe ? (currentUserStatus || "AUTORRASTREO ACTIVADO") : (f.status || funnyStatusMessages[statusIdx]);
 
@@ -144,12 +151,18 @@ export async function updateFriendsUI() {
         </div>
         <div class="friend-funny-status">"${funnyStatus}"</div>
         <div class="friend-meta">
-          <span class="friend-dist-chip">${distStr}</span>
+          <span class="friend-dist-chip">${f.isMe ? '' : 'DISTANCIA: '} ${distStr}</span>
         </div>
       </div>
+      ${!f.isMe ? `<button class="btn-follow">${isTracking ? 'DETENER' : 'SEGUIR'}</button>` : ''}
     `;
     
     if (!f.isMe) {
+        const followBtn = el.querySelector('.btn-follow');
+        followBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleTracking(f);
+        });
         el.addEventListener('click', () => toggleTracking(f));
     } else {
         el.addEventListener('click', () => {
@@ -180,9 +193,15 @@ export async function updateFriendsUI() {
       
       if (isTracking) {
           updateTrackingUI(f, angle);
+          radarTargetLabel.classList.remove('hidden');
+          targetNameVal.textContent = f.user_name.toUpperCase();
       }
     }
   });
+  
+  if (!trackingId) {
+    radarTargetLabel.classList.add('hidden');
+  }
   
   if (trackingId && !friends.some(f => f.device_id === trackingId)) {
       stopTracking();
@@ -195,6 +214,8 @@ function toggleTracking(friend) {
     } else {
         trackingId = friend.device_id;
         radarTargetIndicator.classList.remove('hidden');
+        radarTargetLabel.classList.remove('hidden');
+        targetNameVal.textContent = friend.user_name.toUpperCase();
         friendsListContainer.classList.add('hidden'); // Auto-close on selection
         updateFriendsUI();
     }
@@ -203,6 +224,7 @@ function toggleTracking(friend) {
 function stopTracking() {
     trackingId = null;
     radarTargetIndicator.classList.add('hidden');
+    radarTargetLabel.classList.add('hidden');
     updateFriendsUI();
 }
 
