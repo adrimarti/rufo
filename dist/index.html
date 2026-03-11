@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PUTEDEX - Amsterdam 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-gvoNVyET.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-D96Kofz9.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header neon-border-bottom">
+      <h1 class="glitch" data-text="PUTEDEX">PUTEDEX</h1>
+      <p class="subtitle">Amsterdam 2026</p>
+      <div class="progress-container">
+        <div class="progress-bar-bg">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <span id="progress-text">0 / 18</span>
+      </div>
+    </header>
+
+    <main id="tasks-container" class="tasks-grid">
+      <!-- Cards rendered here via JS -->
+    </main>
+  </div>
+
+  <!-- Verification Modal -->
+  <div id="verify-modal" class="modal hidden">
+    <div class="modal-content glass">
+      <h2 class="neon-text-blue">Confirmar Desafío</h2>
+      <p id="modal-task-name"></p>
+      <p class="hint">Introduce el código secreto (HHMM):</p>
+      <input type="number" id="secret-code" placeholder="----" maxlength="4" />
+      <div class="modal-actions">
+        <button id="cancel-btn" class="btn btn-secondary">Cancelar</button>
+        <button id="confirm-btn" class="btn btn-primary neon-btn">Confirmar</button>
+      </div>
+      <p id="modal-error" class="error-msg hidden">Código incorrecto.</p>
+    </div>
+  </div>
+
+</body>
+</html>
