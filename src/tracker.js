@@ -18,6 +18,8 @@ let currentLng = null;
 let locationInterval = null;
 let trackingId = null;
 let currentUserName = null;
+let currentUserStatus = null;
+let onSelfClickCallback = null;
 
 const funnyStatusMessages = [
   "Buscando kebabs",
@@ -32,9 +34,10 @@ const funnyStatusMessages = [
   "Buscando a la novia (es broma)"
 ];
 
-export function initTracker(supabase, deviceId) {
+export function initTracker(supabase, deviceId, onSelfClick = null) {
   supabaseClient = supabase;
   currentDeviceId = deviceId;
+  onSelfClickCallback = onSelfClick;
 
   // Setup UI event listeners
   if (toggleFriendsBtn) {
@@ -51,8 +54,9 @@ export function initTracker(supabase, deviceId) {
   }
 }
 
-export function startLocationTracking(userName) {
+export function startLocationTracking(userName, status = null) {
   currentUserName = userName;
+  currentUserStatus = status;
   radarStatus.textContent = 'Buscando satélites...';
   if (!navigator.geolocation) return;
 
@@ -75,6 +79,7 @@ function updateMyLocation() {
         .upsert({ 
           device_id: currentDeviceId, 
           user_name: currentUserName, 
+          status: currentUserStatus,
           lat: currentLat, 
           lng: currentLng, 
           last_updated: new Date().toISOString() 
@@ -126,8 +131,9 @@ export async function updateFriendsUI() {
     const timeStr = minsAgo < 1 ? 'LIVE' : `HACE ${minsAgo}M`;
     
     // Deterministic funny status based on device_id
+    // Use actual status if available, otherwise deterministic funny status
     const statusIdx = f.device_id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % funnyStatusMessages.length;
-    const funnyStatus = f.isMe ? "AUTORRASTREO ACTIVADO" : funnyStatusMessages[statusIdx];
+    const funnyStatus = f.isMe ? (currentUserStatus || "AUTORRASTREO ACTIVADO") : (f.status || funnyStatusMessages[statusIdx]);
 
     el.innerHTML = `
       <div class="friend-avatar">${f.user_name.charAt(0).toUpperCase()}</div>
@@ -145,6 +151,10 @@ export async function updateFriendsUI() {
     
     if (!f.isMe) {
         el.addEventListener('click', () => toggleTracking(f));
+    } else {
+        el.addEventListener('click', () => {
+          if (onSelfClickCallback) onSelfClickCallback();
+        });
     }
     
     friendsList.appendChild(el);
@@ -201,8 +211,11 @@ function updateTrackingUI(friend, bearing) {
     indicatorDistValue.textContent = distStr;
     radarTargetIndicator.style.transform = `rotate(${bearing}deg)`;
 }
-
-
+export async function updateProfile(newName, newStatus) {
+    currentUserName = newName;
+    currentUserStatus = newStatus;
+    await updateMyLocation();
+}
 
 function calculateBearing(lat1, lon1, lat2, lon2) {
   const phi1 = lat1 * Math.PI / 180;

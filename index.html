@@ -125,7 +125,9 @@
               <div class="overlay-content">
                 <header class="overlay-header">
                   <h3>RASTREADORES ACTIVOS</h3>
-                  <button id="close-friends-btn" class="btn-close">×</button>
+                  <div class="overlay-header-actions">
+                    <button id="close-friends-btn" class="btn-close">×</button>
+                  </div>
                 </header>
                 <div id="friends-list" class="friends-list">
                   <!-- List items here -->
@@ -147,6 +149,25 @@
                 title="Confirmar"></button>
             </div>
             <p id="modal-error" class="error-msg hidden">CÓDIGO ERRÓNEO</p>
+          </div>
+        </div>
+
+        <!-- Locator Profile Modal (Now inside LCD for integration) -->
+        <div id="profile-edit-modal" class="modal hidden integrated">
+          <div class="modal-content lcd-style">
+            <h2>CONFIG PERFIL</h2>
+            <div class="form-group lcd-input">
+              <label>ALIAS (OBLIGATORIO)</label>
+              <input type="text" id="profile-name-input" placeholder="Tu nombre..." maxlength="15" />
+            </div>
+            <div class="form-group lcd-input">
+              <label>ESTADO (MAX 200)</label>
+              <textarea id="profile-status-input" placeholder="¿Qué haces?" maxlength="200" rows="3"></textarea>
+            </div>
+            <div class="modal-actions">
+              <button id="cancel-profile-btn" class="btn-round red" title="Cancelar"></button>
+              <button id="save-profile-btn" class="btn-round green" title="Guardar"></button>
+            </div>
           </div>
         </div>
       </div>

@@ -5,7 +5,8 @@ CREATE TABLE user_locations (
   user_name TEXT NOT NULL,
   lat DOUBLE PRECISION NOT NULL,
   lng DOUBLE PRECISION NOT NULL,
-  last_updated TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+  last_updated TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  status TEXT
 );
 
 -- 2. Habilitar RLS (Row Level Security)

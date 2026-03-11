@@ -777,6 +777,88 @@ body {
   z-index: 1;
 }
 
+.overlay-header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.pkmn-small-btn {
+  background: var(--pkmn-yellow);
+  border: 2px solid var(--pkmn-dark);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 2px 5px;
+  font-size: 1.2rem;
+  transition: transform 0.1s;
+}
+
+.pkmn-small-btn:active {
+  transform: scale(0.9);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 900;
+  margin-bottom: 5px;
+  color: var(--pkmn-dark);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  background: #ffffff;
+  border: 3px solid #333;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1.1rem;
+  box-sizing: border-box;
+}
+
+.btn-round.red {
+  background: var(--pokedex-red);
+  border: 3px solid #333;
+  box-shadow: 4px 4px 0px #333;
+}
+
+.btn-round.red:active {
+  box-shadow: 0px 0px 0px #333;
+  transform: translate(2px, 2px);
+}
+
+.btn-round.red::after {
+  content: '×';
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-round.green {
+  background: #4ade80;
+  border: 3px solid #333;
+  box-shadow: 4px 4px 0px #333;
+}
+
+.btn-round.green:active {
+  box-shadow: 0px 0px 0px #333;
+  transform: translate(2px, 2px);
+}
+
+.btn-round.green::after {
+  content: '✓';
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+}
+
 @keyframes sweep {
   from {
     transform: rotate(0deg);
