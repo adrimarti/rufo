@@ -4,44 +4,110 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PUTEDEX - Amsterdam 2026</title>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="app-container">
-    <header class="header neon-border-bottom">
-      <h1 class="glitch" data-text="PUTEDEX">PUTEDEX</h1>
-      <p class="subtitle">Amsterdam 2026</p>
-      <div class="progress-container">
-        <div class="progress-bar-bg">
-          <div class="progress-bar" id="progress-bar"></div>
+  <div class="pokedex-frame">
+    <div class="pokedex-top">
+      <div class="big-blue-light"></div>
+      <div class="status-lights">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+    </div>
+
+    <div class="lcd-screen-container">
+      <div class="lcd-screen">
+        <div class="view-container">
+          <!-- Tab 1: Pokedex List -->
+          <main id="tasks-view" class="view active">
+            <header class="pokedex-header">
+              <h1>PUTEDEX</h1>
+              <p>Especies de Amsterdam</p>
+              <div class="progress-info">
+                <span id="progress-text">0 / 18 Capuradas</span>
+              </div>
+            </header>
+            <div id="tasks-container" class="tasks-grid">
+              <!-- Cards rendered here via JS -->
+            </div>
+          </main>
+
+          <!-- Tab 2: Radar -->
+          <main id="locator-view" class="view">
+            <div class="locator-header">
+              <h2>RASTREADOR DE ESPECÍMENES</h2>
+              <p>Detección de vida en proximidad</p>
+            </div>
+            
+            <div class="radar-status" id="radar-status">
+              Sincronizando con satélites espía...
+            </div>
+
+            <div class="radar-container" id="radar-container">
+              <div class="radar-disk">
+                <div class="radar-sweep"></div>
+                <div class="radar-crosshair-v"></div>
+                <div class="radar-crosshair-h"></div>
+                <div class="radar-center-blip"></div>
+                <!-- Unified tracking indicator -->
+                <div id="radar-target-indicator" class="radar-target-indicator hidden">
+                  <div class="indicator-dist"><span id="indicator-dist-value">--</span>m</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="friends-list" class="friends-list">
+              <!-- List items here -->
+            </div>
+          </main>
         </div>
-        <span id="progress-text">0 / 18</span>
-      </div>
-    </header>
 
-    <main id="tasks-container" class="tasks-grid">
-      <!-- Cards rendered here via JS -->
-    </main>
-  </div>
-
-  <!-- Verification Modal -->
-  <div id="verify-modal" class="modal hidden">
-    <div class="modal-content glass">
-      <h2 class="neon-text-blue">Confirmar Desafío</h2>
-      <p id="modal-task-name"></p>
-      <p class="hint">Introduce el código secreto (HHMM):</p>
-      <input type="number" id="secret-code" placeholder="----" maxlength="4" />
-      <div class="modal-actions">
-        <button id="cancel-btn" class="btn btn-secondary">Cancelar</button>
-        <button id="confirm-btn" class="btn btn-primary neon-btn">Confirmar</button>
+        <!-- Verification Modal (inside LCD for effect) -->
+        <div id="verify-modal" class="modal hidden">
+          <div class="modal-content">
+            <h2>AVISTAMIENTO</h2>
+            <p id="modal-task-name"></p>
+            <input type="number" id="secret-code" placeholder="CÓDIGO" maxlength="4" />
+            <div class="modal-actions">
+              <button id="cancel-btn" class="btn-round big" title="Cancelar"></button>
+              <button id="confirm-btn" class="btn-round big" style="background: var(--neon-blue);" title="Confirmar"></button>
+            </div>
+            <p id="modal-error" class="error-msg hidden">CÓDIGO ERRÓNEO</p>
+          </div>
+        </div>
       </div>
-      <p id="modal-error" class="error-msg hidden">Código incorrecto.</p>
+    </div>
+
+    <div class="pokedex-controls">
+      <div class="d-pad"></div>
+      <div class="pokedex-nav">
+        <button class="nav-item active" data-target="tasks-view">
+          <span>LISTA</span>
+        </button>
+        <button class="nav-item" data-target="locator-view">
+          <span>RADAR</span>
+        </button>
+      </div>
     </div>
   </div>
 
-  <script type="module" src="/main.js"></script>
+
+  <!-- Locator Welcome Modal -->
+  <div id="locator-name-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>IDENTIFICACIÓN</h2>
+      <p>Introduce tu alias de rastreador</p>
+      <input type="text" id="locator-name-input" placeholder="Nombre..." maxlength="15" />
+      <button id="save-name-btn" class="btn-round big" style="background: var(--neon-blue);"></button>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
 </body>
 </html>
