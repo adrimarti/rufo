@@ -9,7 +9,7 @@
   --lcd-text: #2c3e50;
   --neon-blue: #00f3ff;
   --neon-red: #ff003c;
-  --pkmn-blue: #4a5a8c;
+  --pkmn-red: #dc0a2d; /* Replaced pkmn-blue */
   --pkmn-red-accent: #d63031;
   --pkmn-bg-gray: #e0e0e0;
   --pkmn-grid: rgba(0, 0, 0, 0.05);
@@ -113,7 +113,7 @@ body {
 }
 
 .lcd-inner-header {
-  background: var(--pkmn-blue);
+  background: var(--pokedex-dark-red);
   padding: 5px 15px;
   display: flex;
   align-items: center;
@@ -124,7 +124,8 @@ body {
 .header-title {
   color: #fff;
   font-family: var(--font-pkmn);
-  font-size: 1.8rem; /* Increased from 1.4rem */
+  font-size: 1.8rem;
+  /* Increased from 1.4rem */
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
 }
 
@@ -136,7 +137,7 @@ body {
   color: var(--lcd-text);
   font-family: var(--font-lcd);
   scrollbar-width: thin;
-  scrollbar-color: var(--pkmn-blue) transparent;
+  scrollbar-color: var(--pokedex-red) transparent;
 }
 
 .view {
@@ -168,7 +169,8 @@ body {
 }
 
 .progress-info {
-  font-size: 1.5rem; /* Increased from 1.2rem */
+  font-size: 1.5rem;
+  /* Increased from 1.2rem */
   color: var(--pkmn-red-accent);
   font-weight: bold;
 }
@@ -182,13 +184,15 @@ body {
 }
 
 .task-card {
-  padding: 20px 25px; /* Increased from 12px 15px */
+  padding: 20px 25px;
+  /* Increased from 12px 15px */
   background: #fff;
   border-bottom: 1px solid var(--pkmn-bg-gray);
   cursor: pointer;
   transition: all 0.1s ease;
   display: flex;
-  gap: 20px; /* Increased from 15px */
+  gap: 20px;
+  /* Increased from 15px */
   align-items: center;
   position: relative;
 }
@@ -215,8 +219,10 @@ body {
 }
 
 .pkmn-ball-icon {
-  width: 20px; /* Increased from 16px */
-  height: 20px; /* Increased from 16px */
+  width: 20px;
+  /* Increased from 16px */
+  height: 20px;
+  /* Increased from 16px */
   background: radial-gradient(circle at 50% 50%, #fff 2px, #000 3px, transparent 3px),
     linear-gradient(to bottom, #f00 50%, #fff 50%);
   border-radius: 50%;
@@ -237,9 +243,11 @@ body {
 }
 
 .task-id {
-  font-size: 1.5rem; /* Increased from 1.1rem */
+  font-size: 1.5rem;
+  /* Increased from 1.1rem */
   color: #888;
-  width: 50px; /* Increased from 40px */
+  width: 50px;
+  /* Increased from 40px */
 }
 
 .task-image-thumb {
@@ -265,7 +273,8 @@ body {
 }
 
 .task-name {
-  font-size: 1.6rem; /* Increased from 1rem */
+  font-size: 1.6rem;
+  /* Increased from 1rem */
   font-weight: bold;
   margin-bottom: 2px;
 }
@@ -290,19 +299,22 @@ body {
 }
 
 .btn-back {
-  background: var(--pkmn-blue);
+  background: var(--pkmn-red-accent);
   color: #fff;
   border: none;
   border-radius: 2px;
-  padding: 6px 18px; /* Increased from 4px 12px */
+  padding: 6px 18px;
+  /* Increased from 4px 12px */
   font-family: var(--font-pkmn);
-  font-size: 1.4rem; /* Increased from 1rem */
+  font-size: 1.4rem;
+  /* Increased from 1rem */
   cursor: pointer;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .detail-number {
-  font-size: 1.8rem; /* Increased from 1.4rem */
+  font-size: 1.8rem;
+  /* Increased from 1.4rem */
   font-weight: bold;
   color: var(--pkmn-red-accent);
 }
@@ -327,7 +339,8 @@ body {
 }
 
 #detail-name {
-  font-size: 2.2rem; /* Increased from 1.6rem */
+  font-size: 2.2rem;
+  /* Increased from 1.6rem */
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -344,8 +357,10 @@ body {
   background-image:
     linear-gradient(var(--pkmn-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--pkmn-grid) 1px, transparent 1px);
-  background-size: 12px 12px; /* Slightly larger grid */
-  height: 240px; /* Increased from 200px */
+  background-size: 12px 12px;
+  /* Slightly larger grid */
+  height: 240px;
+  /* Increased from 200px */
   border: 1px solid #888;
   display: flex;
   align-items: center;
@@ -363,7 +378,8 @@ body {
   background: #f8f8f8;
   border: 2px solid #333;
   border-radius: 4px;
-  padding: 15px; /* Increased from 10px */
+  padding: 15px;
+  /* Increased from 10px */
   position: relative;
 }
 
@@ -372,10 +388,13 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-20deg);
-  border: 8px solid var(--neon-red); /* Increased border */
+  border: 8px solid var(--neon-red);
+  /* Increased border */
   color: var(--neon-red);
-  padding: 15px 30px; /* Increased padding */
-  font-size: 2.8rem; /* Increased from 2rem */
+  padding: 15px 30px;
+  /* Increased padding */
+  font-size: 2.8rem;
+  /* Increased from 2rem */
   font-weight: 900;
   text-transform: uppercase;
   background: rgba(255, 255, 255, 0.8);
@@ -392,7 +411,8 @@ body {
 }
 
 .detail-desc {
-  font-size: 1.4rem; /* Increased from 1.1rem */
+  font-size: 1.4rem;
+  /* Increased from 1.1rem */
   line-height: 1.25;
 }
 
@@ -409,18 +429,22 @@ body {
 }
 
 .stat-label {
-  font-size: 1.3rem; /* Increased from 1rem */
+  font-size: 1.3rem;
+  /* Increased from 1rem */
   font-weight: bold;
-  width: 45px; /* Increased from 35px */
+  width: 45px;
+  /* Increased from 35px */
   color: #555;
 }
 
 .stat-bar-bg {
   flex: 1;
-  height: 20px; /* Increased from 14px */
+  height: 20px;
+  /* Increased from 14px */
   background: #ddd;
   border: 1px solid #888;
-  border-radius: 10px; /* Increased from 7px */
+  border-radius: 10px;
+  /* Increased from 7px */
   overflow: hidden;
 }
 
@@ -451,24 +475,30 @@ body {
 }
 
 .ability-section .label {
-  font-size: 1.2rem; /* Increased from 0.9rem */
+  font-size: 1.2rem;
+  /* Increased from 0.9rem */
   color: #777;
 }
 
 .ability-badge {
-  background: var(--pkmn-blue);
+  background: var(--pkmn-red-accent);
   color: #fff;
-  padding: 4px 12px; /* Increased from 2px 8px */
-  border-radius: 4px; /* Increased from 2px */
-  font-size: 1.4rem; /* Increased from 1rem */
+  padding: 4px 12px;
+  /* Increased from 2px 8px */
+  border-radius: 4px;
+  /* Increased from 2px */
+  font-size: 1.4rem;
+  /* Increased from 1rem */
 }
 
 .funny-note {
-  font-size: 1.4rem; /* Increased from 1.1rem */
+  font-size: 1.4rem;
+  /* Increased from 1.1rem */
   font-style: italic;
   color: #444;
   border-top: 1px dashed #ccc;
-  padding-top: 10px; /* Increased from 5px */
+  padding-top: 10px;
+  /* Increased from 5px */
 }
 
 .capture-btn {
@@ -476,9 +506,11 @@ body {
   color: #fff;
   border: 3px solid #000;
   border-radius: 4px;
-  padding: 15px; /* Increased from 10px */
+  padding: 15px;
+  /* Increased from 10px */
   font-family: var(--font-pkmn);
-  font-size: 1.8rem; /* Increased from 1.4rem */
+  font-size: 1.8rem;
+  /* Increased from 1.4rem */
   cursor: pointer;
   box-shadow: 0 4px 0 #8b0000;
   transition: all 0.1s;
@@ -605,9 +637,9 @@ body {
 }
 
 .nav-item.active {
-  background: var(--neon-blue);
-  color: #000;
-  box-shadow: 0 5px 0 #007278;
+  background: var(--neon-red);
+  color: #fff;
+  box-shadow: 0 5px 0 #8b0000;
 }
 
 .nav-item.active[data-target="tasks-view"] {
@@ -622,18 +654,22 @@ body {
   flex-direction: column;
   height: 100%;
   padding: 6px;
-  position: relative; /* Ensure overlay covers this correctly */
+  position: relative;
+  /* Ensure overlay covers this correctly */
 }
 
 .locator-header h2 {
-  font-size: 1.6rem; /* Increased from 1.1rem */
+  font-size: 1.6rem;
+  /* Increased from 1.1rem */
   font-weight: 900;
   color: #000;
-  margin-bottom: 5px; /* Increased from 2px */
+  margin-bottom: 5px;
+  /* Increased from 2px */
 }
 
 .locator-header p {
-  font-size: 1rem; /* Increased from 0.7rem */
+  font-size: 1rem;
+  /* Increased from 0.7rem */
   letter-spacing: 1px;
 }
 
@@ -652,7 +688,7 @@ body {
 }
 
 .pkmn-btn {
-  background: var(--pkmn-blue);
+  background: var(--pkmn-red-accent);
   color: #fff;
   border: 3px solid #000;
   border-radius: 4px;
@@ -660,13 +696,13 @@ body {
   font-family: var(--font-pkmn);
   font-size: 1.4rem;
   cursor: pointer;
-  box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
   transition: all 0.1s;
 }
 
 .pkmn-btn:active {
   transform: translateY(2px);
-  box-shadow: 0 2px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* Friends Overlay */
@@ -676,7 +712,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 1);
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -701,7 +737,7 @@ body {
 .overlay-header h3 {
   font-family: var(--font-pkmn);
   font-size: 1.6rem;
-  color: var(--pkmn-blue);
+  color: var(--pkmn-red-accent);
 }
 
 .btn-close {
@@ -717,8 +753,10 @@ body {
 }
 
 .radar-disk {
-  width: 280px; /* Increased from 220px */
-  height: 280px; /* Increased from 220px */
+  width: 280px;
+  /* Increased from 220px */
+  height: 280px;
+  /* Increased from 220px */
   background: radial-gradient(circle, rgba(0, 50, 0, 0.4) 0%, rgba(0, 20, 0, 0.7) 100%);
   border: 4px solid #333;
   border-radius: 50%;
@@ -776,8 +814,10 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 10px; /* Increased from 6px */
-  height: 10px; /* Increased from 6px */
+  width: 10px;
+  /* Increased from 6px */
+  height: 10px;
+  /* Increased from 6px */
   background: var(--neon-red);
   border-radius: 50%;
   transform: translate(-50%, -50%);
@@ -787,8 +827,10 @@ body {
 
 .radar-blip {
   position: absolute;
-  width: 20px; /* Increased from 14px */
-  height: 20px; /* Increased from 14px */
+  width: 20px;
+  /* Increased from 14px */
+  height: 20px;
+  /* Increased from 14px */
   background: #00ff00;
   border: 2px solid #fff;
   border-radius: 50%;
@@ -798,7 +840,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px; /* Increased from 8px */
+  font-size: 10px;
+  /* Increased from 8px */
   font-weight: bold;
   color: #000;
   animation: blip-pulse 2s infinite;
@@ -839,18 +882,22 @@ body {
 
 .indicator-dist {
   position: absolute;
-  top: 35px; /* Increased from 25px */
+  top: 35px;
+  /* Increased from 25px */
   left: 50%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.7);
-  color: var(--neon-blue);
-  padding: 4px 10px; /* Increased from 2px 6px */
-  border-radius: 6px; /* Increased from 4px */
-  font-size: 1rem; /* Increased from 0.7rem */
+  color: var(--neon-red);
+  padding: 4px 10px;
+  /* Increased from 2px 6px */
+  border-radius: 6px;
+  /* Increased from 4px */
+  font-size: 1rem;
+  /* Increased from 0.7rem */
   font-weight: 900;
   white-space: nowrap;
-  border: 1px solid var(--neon-blue);
-  box-shadow: 0 0 8px var(--neon-blue);
+  border: 1px solid var(--neon-red);
+  box-shadow: 0 0 8px var(--neon-red);
 }
 
 .tracking-footer {
@@ -885,12 +932,14 @@ body {
 }
 
 .friend-card {
-  padding: 15px 20px; /* Increased from 12px */
+  padding: 15px 20px;
+  /* Increased from 12px */
   background: rgba(0, 0, 0, 0.1);
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   display: flex;
-  gap: 15px; /* Increased from 12px */
+  gap: 15px;
+  /* Increased from 12px */
   align-items: center;
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   cursor: pointer;
@@ -932,20 +981,23 @@ body {
 }
 
 .friend-card.self::before {
-  background: var(--neon-blue);
+  background: var(--neon-red);
 }
 
 .friend-avatar {
-  width: 50px; /* Increased from 40px */
-  height: 50px; /* Increased from 40px */
+  width: 50px;
+  /* Increased from 40px */
+  height: 50px;
+  /* Increased from 40px */
   background: #333;
-  color: var(--neon-blue);
+  color: var(--neon-red);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 900;
-  font-size: 1.6rem; /* Increased from 1.2rem */
+  font-size: 1.6rem;
+  /* Increased from 1.2rem */
   border: 2px solid #000;
   flex-shrink: 0;
 }
@@ -964,7 +1016,8 @@ body {
 .friend-name {
   font-weight: 900;
   color: #000;
-  font-size: 1.2rem; /* Increased from 0.9rem */
+  font-size: 1.2rem;
+  /* Increased from 0.9rem */
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -983,7 +1036,8 @@ body {
 }
 
 .friend-funny-status {
-  font-size: 1rem; /* Increased from 0.75rem */
+  font-size: 1rem;
+  /* Increased from 0.75rem */
   font-style: italic;
   opacity: 0.8;
   margin-bottom: 5px;
@@ -995,12 +1049,15 @@ body {
 }
 
 .friend-dist-chip {
-  font-size: 1rem; /* Increased from 0.8rem */
+  font-size: 1rem;
+  /* Increased from 0.8rem */
   font-weight: 900;
   color: #000;
   background: rgba(255, 255, 255, 0.3);
-  padding: 2px 10px; /* Increased from 1px 6px */
-  border-radius: 6px; /* Increased from 4px */
+  padding: 2px 10px;
+  /* Increased from 1px 6px */
+  border-radius: 6px;
+  /* Increased from 4px */
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
