@@ -38,6 +38,47 @@
             </div>
           </main>
 
+          <!-- Specimen Detail View (Hidden by default) -->
+          <main id="specimen-detail" class="view">
+            <button id="back-to-list" class="btn-back">← VOLVER</button>
+            
+            <div class="detail-container">
+              <div class="detail-header">
+                <span id="detail-number" class="detail-number">#00</span>
+                <h2 id="detail-name">ESPECIMEN</h2>
+              </div>
+
+              <div class="detail-image-container">
+                <img id="detail-image" src="" alt="Specimen">
+                <div id="captured-stamp" class="captured-stamp hidden">CAPTURADA</div>
+              </div>
+
+              <div class="detail-info">
+                <p id="detail-desc" class="detail-desc">Descripción aquí...</p>
+                
+                <div class="stats-container">
+                   <div class="stat-row">
+                     <span>ATK</span>
+                     <div class="stat-bar-bg"><div id="bar-atk" class="stat-bar" style="width: 0%"></div></div>
+                   </div>
+                   <div class="stat-row">
+                    <span>DEF</span>
+                    <div class="stat-bar-bg"><div id="bar-def" class="stat-bar" style="width: 0%"></div></div>
+                  </div>
+                </div>
+
+                <div class="ability-section">
+                  <span class="label">HABILIDAD:</span>
+                  <span id="detail-ability" class="ability-badge">Paciencia</span>
+                </div>
+
+                <p id="detail-funny" class="funny-note">Nota graciosa...</p>
+              </div>
+
+              <button id="capture-trigger-btn" class="capture-btn">¡CAPTURAR!</button>
+            </div>
+          </main>
+
           <!-- Tab 2: Radar -->
           <main id="locator-view" class="view">
             <div class="locator-header">

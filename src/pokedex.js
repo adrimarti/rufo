@@ -22,6 +22,21 @@ const verifyConfirmBtn = document.getElementById('confirm-btn');
 const errorMsg = document.getElementById('modal-error');
 const verifyModalContent = verifyModal.querySelector('.modal-content');
 
+// Detail View Elements
+const pokedexView = document.getElementById('tasks-view');
+const detailView = document.getElementById('specimen-detail');
+const backToListBtn = document.getElementById('back-to-list');
+const detailNumber = document.getElementById('detail-number');
+const detailName = document.getElementById('detail-name');
+const detailImage = document.getElementById('detail-image');
+const detailDesc = document.getElementById('detail-desc');
+const detailFunny = document.getElementById('detail-funny');
+const detailAbility = document.getElementById('detail-ability');
+const barAtk = document.getElementById('bar-atk');
+const barDef = document.getElementById('bar-def');
+const captureTriggerBtn = document.getElementById('capture-trigger-btn');
+const capturedStamp = document.getElementById('captured-stamp');
+
 export async function initPokedex(supabase) {
   supabaseClient = supabase;
   
@@ -37,7 +52,57 @@ export async function initPokedex(supabase) {
     if (e.key === 'Enter') verifyConfirmBtn.click();
   });
 
+  backToListBtn.addEventListener('click', showListView);
+  captureTriggerBtn.addEventListener('click', () => {
+    const task = currentTasks.find(t => t.id === selectedTaskId);
+    if (task) openVerifyModal(task);
+  });
+
   return await fetchTasks();
+}
+
+function showListView() {
+  detailView.classList.remove('active');
+  pokedexView.classList.add('active');
+  selectedTaskId = null;
+}
+
+function showDetailView(task) {
+  selectedTaskId = task.id;
+  
+  detailNumber.textContent = `#${task.task_number.toString().padStart(2, '0')}`;
+  detailName.textContent = task.name;
+  detailDesc.textContent = task.description;
+  detailFunny.textContent = task.funny_note || "Sin notas adicionales.";
+  detailAbility.textContent = task.ability || "Desconocida";
+  
+  // Set bars
+  barAtk.style.width = `${task.atk || 50}%`;
+  barDef.style.width = `${task.def || 50}%`;
+  
+  // Image logic
+  let imgPath = defaultPlaceholder;
+  for (const key in archetypeImages) {
+    if (task.name.includes(key) || task.description.includes(key)) {
+      imgPath = archetypeImages[key];
+      break;
+    }
+  }
+  detailImage.src = imgPath;
+
+  // Captured state
+  if (task.is_completed) {
+    capturedStamp.classList.remove('hidden');
+    captureTriggerBtn.disabled = true;
+    captureTriggerBtn.textContent = "CAPTURADA";
+  } else {
+    capturedStamp.classList.add('hidden');
+    captureTriggerBtn.disabled = false;
+    captureTriggerBtn.textContent = "¡CAPTURAR!";
+  }
+
+  pokedexView.classList.remove('active');
+  detailView.classList.add('active');
 }
 
 async function fetchTasks() {
@@ -90,9 +155,7 @@ function renderTasks() {
       </div>
     `;
 
-    if (!task.is_completed) {
-      card.addEventListener('click', () => openVerifyModal(task));
-    }
+    card.addEventListener('click', () => showDetailView(task));
 
     tasksContainer.appendChild(card);
   });
@@ -132,7 +195,13 @@ async function handleVerification() {
     await supabaseClient.from('putedex_tasks').update({ is_completed: true, completed_at: new Date().toISOString() }).eq('id', selectedTaskId);
     
     const idx = currentTasks.findIndex(t => t.id === selectedTaskId);
-    if (idx > -1) currentTasks[idx].is_completed = true;
+    if (idx > -1) {
+      currentTasks[idx].is_completed = true;
+      // Also update detail view if active
+      capturedStamp.classList.remove('hidden');
+      captureTriggerBtn.disabled = true;
+      captureTriggerBtn.textContent = "CAPTURADA";
+    }
 
     closeVerifyModal();
     renderTasks();
