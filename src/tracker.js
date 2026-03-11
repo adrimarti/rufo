@@ -6,6 +6,9 @@ const trackingName = document.getElementById('tracking-target-name');
 const trackingDist = document.getElementById('tracking-distance');
 const radarTargetIndicator = document.getElementById('radar-target-indicator');
 const indicatorDistValue = document.getElementById('indicator-dist-value');
+const toggleFriendsBtn = document.getElementById('toggle-friends-btn');
+const closeFriendsBtn = document.getElementById('close-friends-btn');
+const friendsListContainer = document.getElementById('friends-list-container');
 
 // State
 let supabaseClient = null;
@@ -32,6 +35,20 @@ const funnyStatusMessages = [
 export function initTracker(supabase, deviceId) {
   supabaseClient = supabase;
   currentDeviceId = deviceId;
+
+  // Setup UI event listeners
+  if (toggleFriendsBtn) {
+    toggleFriendsBtn.addEventListener('click', () => {
+      friendsListContainer.classList.remove('hidden');
+      updateFriendsUI(); // Refresh list when opening
+    });
+  }
+
+  if (closeFriendsBtn) {
+    closeFriendsBtn.addEventListener('click', () => {
+      friendsListContainer.classList.add('hidden');
+    });
+  }
 }
 
 export function startLocationTracking(userName) {
@@ -168,6 +185,7 @@ function toggleTracking(friend) {
     } else {
         trackingId = friend.device_id;
         radarTargetIndicator.classList.remove('hidden');
+        friendsListContainer.classList.add('hidden'); // Auto-close on selection
         updateFriendsUI();
     }
 }

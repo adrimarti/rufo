@@ -70,7 +70,7 @@ function showListView() {
 function showDetailView(task) {
   selectedTaskId = task.id;
   
-  detailNumber.textContent = `#${task.task_number.toString().padStart(2, '0')}`;
+  detailNumber.textContent = `#${task.task_number.toString().padStart(3, '0')}`;
   detailName.textContent = task.name;
   detailDesc.textContent = task.description;
   detailFunny.textContent = task.funny_note || "Sin notas adicionales.";
@@ -133,29 +133,25 @@ function renderTasks() {
   currentTasks.forEach(task => {
     const card = document.createElement('div');
     card.className = `task-card ${task.is_completed ? 'completed' : ''}`;
+    if (selectedTaskId === task.id) card.classList.add('active');
     
-    // Archetype Image logic
-    let imgPath = defaultPlaceholder;
-    for (const key in archetypeImages) {
-      if (task.name.includes(key) || task.description.includes(key)) {
-        imgPath = archetypeImages[key];
-        break;
-      }
-    }
-
-    const statusIcon = task.is_completed ? '⭐' : `#${task.task_number}`;
+    const pokeball = task.is_completed ? '<div class="pkmn-ball-icon"></div>' : '';
+    const number = task.task_number.toString().padStart(3, '0');
 
     card.innerHTML = `
-      <div class="task-image-thumb">
-        <img src="${imgPath}" alt="${task.name}">
-      </div>
+      <div class="task-id">${number}</div>
+      ${pokeball}
       <div class="task-info">
-        <div class="task-name">${statusIcon} ${task.name}</div>
-        <div class="task-desc">${task.description}</div>
+        <div class="task-name">${task.name}</div>
       </div>
     `;
 
-    card.addEventListener('click', () => showDetailView(task));
+    card.addEventListener('click', () => {
+      // Remove active from others
+      document.querySelectorAll('.task-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      showDetailView(task);
+    });
 
     tasksContainer.appendChild(card);
   });

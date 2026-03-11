@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <div class="pokedex-frame">
     <div class="pokedex-top">
@@ -40,39 +42,50 @@
 
           <!-- Specimen Detail View (Hidden by default) -->
           <main id="specimen-detail" class="view">
-            <button id="back-to-list" class="btn-back">← VOLVER</button>
-            
+            <div class="detail-top-nav">
+              <button id="back-to-list" class="btn-back">← VOLVER</button>
+              <span id="detail-number" class="detail-number">#00</span>
+            </div>
+
             <div class="detail-container">
-              <div class="detail-header">
-                <span id="detail-number" class="detail-number">#00</span>
+              <div class="detail-box name-box">
                 <h2 id="detail-name">ESPECIMEN</h2>
               </div>
 
-              <div class="detail-image-container">
-                <img id="detail-image" src="" alt="Specimen">
-                <div id="captured-stamp" class="captured-stamp hidden">CAPTURADA</div>
+              <div class="detail-image-outer">
+                <div class="detail-image-container">
+                  <img id="detail-image" src="" alt="Specimen">
+                  <div id="captured-stamp" class="captured-stamp hidden">CAPTURADA</div>
+                </div>
               </div>
 
               <div class="detail-info">
-                <p id="detail-desc" class="detail-desc">Descripción aquí...</p>
-                
-                <div class="stats-container">
-                   <div class="stat-row">
-                     <span>ATK</span>
-                     <div class="stat-bar-bg"><div id="bar-atk" class="stat-bar" style="width: 0%"></div></div>
-                   </div>
-                   <div class="stat-row">
-                    <span>DEF</span>
-                    <div class="stat-bar-bg"><div id="bar-def" class="stat-bar" style="width: 0%"></div></div>
+                <div class="data-box desc-box">
+                  <p id="detail-desc" class="detail-desc">Descripción aquí...</p>
+                </div>
+
+                <div class="stats-container data-box">
+                  <div class="stat-row">
+                    <span class="stat-label">ATK</span>
+                    <div class="stat-bar-bg">
+                      <div id="bar-atk" class="stat-bar" style="width: 0%"></div>
+                    </div>
+                  </div>
+                  <div class="stat-row">
+                    <span class="stat-label">DEF</span>
+                    <div class="stat-bar-bg">
+                      <div id="bar-def" class="stat-bar" style="width: 0%"></div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="ability-section">
-                  <span class="label">HABILIDAD:</span>
-                  <span id="detail-ability" class="ability-badge">Paciencia</span>
+                <div class="data-box ability-box">
+                  <div class="ability-section">
+                    <span class="label">HABILIDAD:</span>
+                    <span id="detail-ability" class="ability-badge">Paciencia</span>
+                  </div>
+                  <p id="detail-funny" class="funny-note">Nota graciosa...</p>
                 </div>
-
-                <p id="detail-funny" class="funny-note">Nota graciosa...</p>
               </div>
 
               <button id="capture-trigger-btn" class="capture-btn">¡CAPTURAR!</button>
@@ -85,7 +98,7 @@
               <h2>RASTREADOR DE ESPECÍMENES</h2>
               <p>Detección de vida en proximidad</p>
             </div>
-            
+
             <div class="radar-status" id="radar-status">
               Sincronizando con satélites espía...
             </div>
@@ -103,8 +116,21 @@
               </div>
             </div>
 
-            <div id="friends-list" class="friends-list">
-              <!-- List items here -->
+            <div class="radar-actions">
+              <button id="toggle-friends-btn" class="pkmn-btn">LISTA DE AMIGOS</button>
+            </div>
+
+            <!-- Friends List Container (Hidden by default) -->
+            <div id="friends-list-container" class="friends-overlay hidden">
+              <div class="overlay-content">
+                <header class="overlay-header">
+                  <h3>RASTREADORES ACTIVOS</h3>
+                  <button id="close-friends-btn" class="btn-close">×</button>
+                </header>
+                <div id="friends-list" class="friends-list">
+                  <!-- List items here -->
+                </div>
+              </div>
             </div>
           </main>
         </div>
@@ -117,7 +143,8 @@
             <input type="number" id="secret-code" placeholder="CÓDIGO" maxlength="4" />
             <div class="modal-actions">
               <button id="cancel-btn" class="btn-round big" title="Cancelar"></button>
-              <button id="confirm-btn" class="btn-round big" style="background: var(--neon-blue);" title="Confirmar"></button>
+              <button id="confirm-btn" class="btn-round big" style="background: var(--neon-blue);"
+                title="Confirmar"></button>
             </div>
             <p id="modal-error" class="error-msg hidden">CÓDIGO ERRÓNEO</p>
           </div>
@@ -151,4 +178,5 @@
 
   <script type="module" src="main.js"></script>
 </body>
+
 </html>
